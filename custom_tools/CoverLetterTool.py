@@ -210,7 +210,7 @@ Sincerely,
         
         if not output_file:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            output_file = f"cover_letter_{timestamp}.txt"
+            output_file = f"cover_letter.txt"
         
         return f"""To create a cover letter, I need the resume and job description content first.
 Please use these steps:

@@ -36,7 +36,7 @@ def generate_cover_letter_interactive():
         # Use absolute path to ensure file creation
         output_dir = os.path.abspath(f"./output/cover_letter_{timestamp}")
         os.makedirs(output_dir, exist_ok=True)
-        output_path = os.path.join(output_dir, f"cover_letter.txt")
+        output_path = os.path.join(output_dir, "cover_letter.txt")
     
     print(f"\n🔄 Processing files...")
     
@@ -85,7 +85,7 @@ def generate_cover_letter_direct(resume_pdf_path: str, job_txt_path: str,
         # Use absolute path to ensure file creation
         output_dir = os.path.abspath(f"./output/cover_letter_{timestamp}")
         os.makedirs(output_dir, exist_ok=True)
-        output_file = os.path.join(output_dir, f"cover_letter.txt")
+        output_file = os.path.join(output_dir, "cover_letter.txt")
     
     generation_prompt = f"""Create a cover letter using the resume and job description data you just processed.
     Company: {company_name if company_name else 'the organization'}
