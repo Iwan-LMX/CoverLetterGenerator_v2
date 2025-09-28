@@ -47,7 +47,7 @@ def generate_cover_letter_interactive():
     
     # Step 2: Read job description
     print("📋 Reading job description...")
-    job_result = agent.input(f"Read the job description from text file at {job_path}")
+    job_result = agent.input(f"Read job description from: {job_path}")
     print("✅ Job description processed")
     
     # Step 3: Generate cover letter
