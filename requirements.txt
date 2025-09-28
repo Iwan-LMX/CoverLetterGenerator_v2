@@ -5,6 +5,9 @@ connectonion
 PyPDF2>=3.0.0
 PyMuPDF>=1.23.0
 
+# PDF generation library
+reportlab>=4.4.0
+
 # Browser automation (existing)
 playwright>=1.40.0
 

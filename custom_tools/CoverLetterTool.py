@@ -26,7 +26,7 @@ Sincerely,
     
     def generate_cover_letter(self, resume_text: str, job_description: str, 
                             company_name: str = "", position_title: str = "",
-                            output_file: str = "") -> str:
+                            output_file: str = "", generate_pdf: bool = True) -> str:
         """Generate a cover letter based on resume and job description"""
         
         # Extract key information
@@ -64,9 +64,37 @@ Sincerely,
                 if dir_path:  # Only create directory if path is not empty
                     os.makedirs(dir_path, exist_ok=True)
                 
+                # Save text file
                 with open(output_file, 'w', encoding='utf-8') as file:
                     file.write(cover_letter)
-                return f"Cover letter generated and saved to {output_file}:\n\n{cover_letter}"
+                
+                result_message = f"Cover letter generated and saved to {output_file}"
+                
+                # Generate PDF if requested
+                if generate_pdf:
+                    pdf_file = os.path.splitext(output_file)[0] + ".pdf"
+                    try:
+                        from .PDFGeneratorTool import PDFGeneratorTool
+                        pdf_generator = PDFGeneratorTool()
+                        
+                        pdf_result = pdf_generator.create_cover_letter_pdf(
+                            cover_letter_text=cover_letter,
+                            output_file=pdf_file,
+                            applicant_name=candidate_name,
+                            position=position,
+                            company=company
+                        )
+                        
+                        if "successfully created" in pdf_result:
+                            result_message += f"\nPDF version saved to {pdf_file}"
+                        else:
+                            result_message += f"\nPDF generation note: {pdf_result}"
+                            
+                    except Exception as pdf_error:
+                        result_message += f"\nPDF generation failed: {str(pdf_error)}"
+                
+                return f"{result_message}:\n\n{cover_letter}"
+                
             except Exception as e:
                 return f"Cover letter generated but failed to save to {output_file}: {str(e)}\n\n{cover_letter}"
         

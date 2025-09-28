@@ -2,18 +2,19 @@
 """Cover Letter Generator Agent using Connectonion"""
 
 from connectonion import Agent
-from custom_tools import PDFTool, TextFileTool, CoverLetterTool
+from custom_tools import PDFTool, TextFileTool, CoverLetterTool, PDFGeneratorTool
 import os
 
 # Initialize tools
 pdf_tool = PDFTool()
 text_tool = TextFileTool()
 cover_letter_tool = CoverLetterTool()
+pdf_generator_tool = PDFGeneratorTool()
 
 # Create agent with all the tools
 agent = Agent(
     name="CoverLetterGenerator",
-    tools=[pdf_tool, text_tool, cover_letter_tool],
+    tools=[pdf_tool, text_tool, cover_letter_tool, pdf_generator_tool],
     system_prompt="prompts/CLGenerator.md",
 )
 
@@ -33,9 +34,9 @@ def generate_cover_letter_interactive():
         import datetime
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
         # Use absolute path to ensure file creation
-        output_dir = os.path.abspath("./output")
+        output_dir = os.path.abspath(f"./output/cover_letter_{timestamp}")
         os.makedirs(output_dir, exist_ok=True)
-        output_path = os.path.join(output_dir, f"cover_letter_{timestamp}.txt")
+        output_path = os.path.join(output_dir, f"cover_letter.txt")
     
     print(f"\n🔄 Processing files...")
     
@@ -82,9 +83,9 @@ def generate_cover_letter_direct(resume_pdf_path: str, job_txt_path: str,
         import datetime
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
         # Use absolute path to ensure file creation
-        output_dir = os.path.abspath("./output")
+        output_dir = os.path.abspath(f"./output/cover_letter_{timestamp}")
         os.makedirs(output_dir, exist_ok=True)
-        output_file = os.path.join(output_dir, f"cover_letter_{timestamp}.txt")
+        output_file = os.path.join(output_dir, f"cover_letter.txt")
     
     generation_prompt = f"""Create a cover letter using the resume and job description data you just processed.
     Company: {company_name if company_name else 'the organization'}
@@ -115,7 +116,7 @@ if __name__ == "__main__":
         
         # Sample paths (modify these)
         sample_resume = "./resumes/MingxinLi_Web_CV.pdf"  # Change to your resume path
-        sample_job = "sample_job_description.txt"   # Change to your job description path
+        sample_job = "./input/job_description.txt"   # Change to your job description path
         
         if os.path.exists(sample_resume) and os.path.exists(sample_job):
             output_file, result = generate_cover_letter_direct(

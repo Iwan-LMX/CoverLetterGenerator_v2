@@ -9,24 +9,10 @@ An intelligent cover letter generation system built with Connectonion that reads
 - **Intelligent Matching**: Identifies relevant skills and experience that match job requirements
 - **Professional Templates**: Uses customizable cover letter templates
 - **Automated Generation**: Creates personalized cover letters with company and position details
-- **File Output**: Saves generated cover letters to text files
+- **Dual Format Output**: Saves generated cover letters to both TXT and PDF files
+- **Professional PDF Layout**: Creates well-formatted PDF documents with proper styling
 
 ## Tools Overview
-
-### 1. PDFTool
-- `extract_resume_text(file_path)` - Extract all text from PDF resume
-- `get_resume_summary(file_path)` - Get condensed resume summary
-- Supports both PyPDF2 and PyMuPDF for maximum compatibility
-
-### 2. TextFileTool  
-- `read_job_description(file_path)` - Read job description from text file
-- `get_job_summary(file_path, max_chars)` - Get summarized job requirements
-- `write_text_file(file_path, content)` - Save generated content to file
-
-### 3. CoverLetterTool
-- `generate_cover_letter(resume_text, job_description, ...)` - Create personalized cover letter
-- `get_template()` / `set_template()` - Manage cover letter templates
-- Intelligent skill matching and experience highlighting
 
 ## Installation
 
@@ -35,9 +21,9 @@ An intelligent cover letter generation system built with Connectonion that reads
 pip install -r requirements.txt
 ```
 
-2. If you encounter PDF library issues, install them separately:
+2. If you encounter library issues, install them separately:
 ```bash
-pip install PyPDF2 PyMuPDF
+pip install PyPDF2 PyMuPDF reportlab
 ```
 
 ## Usage
@@ -121,17 +107,19 @@ This will:
 
 ```
 agentDemo_Connectonion/
-├── custom_tools/
-│   ├── __init__.py
-│   ├── PDFTool.py          # PDF resume reading
-│   ├── TextFileTool.py     # Text file operations
-│   ├── CoverLetterTool.py  # Cover letter generation
-│   └── BrowserTool.py      # Existing browser tool
-├── cover_letter_agent.py   # Main agent script
-├── demo_cover_letter.py    # Demo and examples
-├── sample_job_description.txt
-├── requirements.txt
-└── README.md
+|-- README.md
+|-- cover_letter_agent.py
+|-- custom_tools/
+|
+|-- input/
+|   `-- job_description.txt
+|-- output/
+|-- prompts/
+|   `-- CLGenerator.md
+|-- requirements.txt
+|-- resumes/
+|   `-- <Your CV>.pdf
+`-- venv/
 ```
 
 ## Workflow
