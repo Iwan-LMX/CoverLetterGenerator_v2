@@ -1,0 +1,12 @@
+# Core dependencies
+connectonion
+
+# PDF processing libraries
+PyPDF2>=3.0.0
+PyMuPDF>=1.23.0
+
+# Browser automation (existing)
+playwright>=1.40.0
+
+# Optional: for enhanced text processing
+python-docx>=0.8.11
