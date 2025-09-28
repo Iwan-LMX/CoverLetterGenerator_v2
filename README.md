@@ -1,3 +1,7 @@
+Don't like text document? Don't worry here's a video can help you!
+
+[![Watch the video](https://img.youtube.com/vi/qTyXHnXnnko/hqdefault.jpg)](https://www.youtube.com/watch?v=qTyXHnXnnko)
+
 # Cover Letter Generator Agent
 
 An intelligent cover letter generation system built with Connectonion that reads PDF resumes and text job descriptions to create personalized cover letters.
