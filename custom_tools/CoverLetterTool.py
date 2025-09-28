@@ -21,7 +21,7 @@ I am particularly drawn to this opportunity because {{why_company}}. I believe m
 Thank you for considering my application. I look forward to the opportunity to discuss how my skills and enthusiasm can contribute to {{company}}'s continued success.
 
 Sincerely,
-[Your Name]
+{{Your Name}}
 """.strip()
     
     def generate_cover_letter(self, resume_text: str, job_description: str, 
@@ -52,11 +52,17 @@ Sincerely,
         key_skills = self._extract_key_skills(resume_text, job_description)
         cover_letter = cover_letter.replace("{{key_skills}}", key_skills)
         
+        # Extract and replace name
+        candidate_name = self._extract_name_from_resume(resume_text)
+        cover_letter = cover_letter.replace("{{Your Name}}", candidate_name)
+        
         # Save to file if specified
         if output_file:
             try:
-                # Create directory if it doesn't exist
-                os.makedirs(os.path.dirname(output_file), exist_ok=True)
+                # Create directory if it doesn't exist (only if there's a directory path)
+                dir_path = os.path.dirname(output_file)
+                if dir_path:  # Only create directory if path is not empty
+                    os.makedirs(dir_path, exist_ok=True)
                 
                 with open(output_file, 'w', encoding='utf-8') as file:
                     file.write(cover_letter)
@@ -115,6 +121,59 @@ Sincerely,
             return ", ".join(skills[:3])  # Limit to top 3
         else:
             return "software development, problem-solving, and team collaboration"
+    
+    def _extract_name_from_resume(self, resume_text: str) -> str:
+        """Extract candidate name from resume text"""
+        import re
+        
+        lines = resume_text.strip().split('\n')
+        
+        # Common patterns for names in resumes
+        name_patterns = [
+            # First line is often the name
+            r'^([A-Z][a-z]+ [A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)',
+            # Name followed by title/profession
+            r'^([A-Z][a-z]+ [A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\s*[-\n]',
+            # Name with middle initial
+            r'^([A-Z][a-z]+ [A-Z]\. [A-Z][a-z]+)',
+            # Name in "Name:" format
+            r'^(?:Name|Full Name):\s*([A-Z][a-z]+ [A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)',
+        ]
+        
+        # Try to find name in first few lines
+        for i, line in enumerate(lines[:5]):  # Check first 5 lines
+            line = line.strip()
+            if not line:
+                continue
+                
+            # Skip common header words
+            skip_words = ['resume', 'cv', 'curriculum', 'vitae', 'contact', 'phone', 'email', 'address']
+            if any(word in line.lower() for word in skip_words):
+                continue
+            
+            # Try each pattern
+            for pattern in name_patterns:
+                match = re.search(pattern, line, re.IGNORECASE)
+                if match:
+                    name = match.group(1).strip()
+                    # Validate it looks like a real name (2-3 words, proper capitalization)
+                    words = name.split()
+                    if 2 <= len(words) <= 3 and all(word[0].isupper() for word in words):
+                        return name
+        
+        # Fallback: try to find first capitalized words that look like names
+        for line in lines[:3]:
+            line = line.strip()
+            words = line.split()
+            if len(words) >= 2:
+                # Check if first two words are capitalized and look like names
+                if (words[0][0].isupper() and words[1][0].isupper() and 
+                    words[0].isalpha() and words[1].isalpha() and
+                    len(words[0]) > 1 and len(words[1]) > 1):
+                    return f"{words[0]} {words[1]}"
+        
+        # Last resort: return placeholder
+        return "Your Name"
     
     def create_cover_letter_from_files(self, resume_pdf_path: str, job_txt_path: str,
                                      company_name: str = "", position_title: str = "",

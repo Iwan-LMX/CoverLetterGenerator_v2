@@ -14,22 +14,7 @@ cover_letter_tool = CoverLetterTool()
 agent = Agent(
     name="CoverLetterGenerator",
     tools=[pdf_tool, text_tool, cover_letter_tool],
-    system_prompt="""You are a professional cover letter generator assistant.
-    
-    Your capabilities:
-    1. Read PDF resume files and extract text content
-    2. Read text files containing job descriptions  
-    3. Generate personalized cover letters based on resume and job requirements
-    4. Save cover letters to text files
-    
-    Workflow:
-    - When asked to create a cover letter, first read the resume PDF
-    - Then read the job description text file
-    - Extract relevant skills and experience that match the job requirements
-    - Generate a professional, personalized cover letter
-    - Save the result to a text file
-    
-    Be helpful, professional, and ensure the cover letters are well-structured and compelling.""",
+    system_prompt="prompts/CLGenerator.md",
 )
 
 def generate_cover_letter_interactive():
@@ -47,7 +32,10 @@ def generate_cover_letter_interactive():
     if not output_path:
         import datetime
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        output_path = f"cover_letter_{timestamp}.txt"
+        # Use absolute path to ensure file creation
+        output_dir = os.path.abspath("./output")
+        os.makedirs(output_dir, exist_ok=True)
+        output_path = os.path.join(output_dir, f"cover_letter_{timestamp}.txt")
     
     print(f"\n🔄 Processing files...")
     
@@ -93,7 +81,10 @@ def generate_cover_letter_direct(resume_pdf_path: str, job_txt_path: str,
     if not output_file:
         import datetime
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        output_file = f"cover_letter_{timestamp}.txt"
+        # Use absolute path to ensure file creation
+        output_dir = os.path.abspath("./output")
+        os.makedirs(output_dir, exist_ok=True)
+        output_file = os.path.join(output_dir, f"cover_letter_{timestamp}.txt")
     
     generation_prompt = f"""Create a cover letter using the resume and job description data you just processed.
     Company: {company_name if company_name else 'the organization'}
@@ -123,8 +114,8 @@ if __name__ == "__main__":
         print("\n📝 Example mode - modify the file paths in the code to use your files")
         
         # Sample paths (modify these)
-        sample_resume = "sample_resume.pdf"  # Change to your resume path
-        sample_job = "job_description.txt"   # Change to your job description path
+        sample_resume = "./resumes/MingxinLi_Web_CV.pdf"  # Change to your resume path
+        sample_job = "sample_job_description.txt"   # Change to your job description path
         
         if os.path.exists(sample_resume) and os.path.exists(sample_job):
             output_file, result = generate_cover_letter_direct(

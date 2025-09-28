@@ -1,35 +1,36 @@
-Sample Job Description
+Description
+BizCover who? You haven’t heard of us? 
 
-Position: Software Developer
-Company: Tech Innovations Inc.
+We dominate the SME business insurance market by having an online platform that makes comparing and buying business insurance a super easy process. Not to toot our own horn but we have been recognized in Deloittes fast 50 companies as one of the fastest growing technology companies and Westpac’s top 20 businesses of tomorrow - #killingit 
 
-We are seeking a talented Software Developer to join our dynamic team. The ideal candidate will have experience with:
+About the Role:
 
-Required Skills:
-- Python programming (3+ years)
-- Web development with React and Node.js
-- Database design and SQL
-- RESTful API development
-- Version control with Git
-- Agile development methodologies
+We are seeking a Junior to Mid-Level Software Engineer to join our growing team in Sydney. This is an exciting opportunity to work on the development of a new platform that will transform how QA automation is managed and executed. The platform will empower non-technical and QA users to easily run automated tests, bridging the gap between engineering and quality assurance. 
+ 
+You will work closely with senior engineers, QA specialists, and product stakeholders to design, build, and maintain scalable, user-friendly solutions. 
 
-Responsibilities:
-- Develop and maintain web applications
-- Collaborate with cross-functional teams
-- Write clean, maintainable code
-- Participate in code reviews
-- Troubleshoot and debug applications
+Key Responsibilities:
 
-Preferred Qualifications:
-- Experience with cloud platforms (AWS, Azure)
-- Knowledge of Docker and containerization
-- Familiarity with microservices architecture
-- Bachelor's degree in Computer Science or related field
+Develop and maintain features for a new QA automation platform using Node.js, Vue.js, and Playwright. 
+Collaborate with the product and QA teams to design solutions that enable non-technical users to create and run automated tests. 
+Write clean, maintainable, and well-documented code. 
+Participate in code reviews, sprint planning, and team discussions. 
+Troubleshoot, debug, and optimize application performance. 
+Contribute to improving QA automation workflows and development best practices. 
+Requirements
+Solid experience with JavaScript/TypeScript development. 
+Hands-on experience with Node.js and Vue.js. 
+Exposure to or interest in test automation frameworks, ideally Playwright. 
+Strong problem-solving skills and eagerness to learn new technologies. 
+Good communication skills and ability to collaborate with cross-functional teams.
+Nice to Have 
 
-We offer:
-- Competitive salary
-- Health benefits
-- Professional development opportunities
-- Remote work flexibility
-
-Join our innovative team and help us build the future of technology!
+Basic understanding of C# or willingness to upskill. 
+Experience working in an agile environment. 
+Familiarity with QA processes or tools.
+Benefits
+Opportunity to work on a greenfield project with modern technologies. 
+Hybrid working model – 2 days in our Sydney office, 3 days remote. 
+Supportive and collaborative team environment. 
+Exclusive discounts via a fantastic benefits app
+Career development and training opportunities.
