@@ -52,10 +52,13 @@ def generate_cover_letter_interactive():
     
     # Step 3: Generate cover letter
     print("✍️ Generating cover letter...")
-    generation_prompt = f"""Generate a cover letter using the resume and job description you just read.
-    Company name: {company_name if company_name else 'Not specified'}
-    Position: {position_title if position_title else 'Not specified'}
-    Save the cover letter to: {output_path}"""
+    generation_prompt = f"""Create a cover letter using the resume and job description data you just processed.
+    Company: {company_name if company_name else 'the organization'}
+    Position: {position_title if position_title else 'the position'}  
+    Output file: {output_path}
+    Generate PDF: Yes, also create a PDF version alongside the text file
+    
+    Make it professional and highlight relevant experience. Use the generate_cover_letter function with generate_pdf=True."""
     
     result = agent.input(generation_prompt)
     print(f"✅ Cover letter generated and saved to: {output_path}")
