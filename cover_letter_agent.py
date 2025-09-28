@@ -82,7 +82,7 @@ def generate_cover_letter_direct(resume_pdf_path: str, job_txt_path: str,
     if not output_file:
         import datetime
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        # Use absolute path to ensure file creation
+        # Create subdirectory for each cover letter generation
         output_dir = os.path.abspath(f"./output/cover_letter_{timestamp}")
         os.makedirs(output_dir, exist_ok=True)
         output_file = os.path.join(output_dir, "cover_letter.txt")
@@ -91,8 +91,9 @@ def generate_cover_letter_direct(resume_pdf_path: str, job_txt_path: str,
     Company: {company_name if company_name else 'the organization'}
     Position: {position_title if position_title else 'the position'}  
     Output file: {output_file}
+    Generate PDF: Yes, also create a PDF version alongside the text file
     
-    Make it professional and highlight relevant experience."""
+    Make it professional and highlight relevant experience. Use the generate_cover_letter function with generate_pdf=True."""
     
     result = agent.input(generation_prompt)
     
